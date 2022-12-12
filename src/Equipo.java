@@ -5,11 +5,11 @@ public class Equipo {
 	
 
 	public String toString(){
-		String res="";
+		StringBuffer res=new StringBuffer("");
 		for(Personaje i:equipo) {
-			res+=i+"\n";
+			res.append(i+"\n");
 		}
-		return res;
+		return res.toString();
 	}
 	
 	public Personaje[] getEquipo() {
