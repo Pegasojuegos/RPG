@@ -3,6 +3,7 @@ public class Hechizo {
 	private final String lista[]={"Llama del dragón","Sanación","Beso de la muerte","Furia vikinga","Caelestis protector"};
 	private int numHechizo;
 	
+
 	public Hechizo(String nom) {
 		for(int i=0;i<lista.length;i++) {
 			if(lista[i].equalsIgnoreCase(nom)) {

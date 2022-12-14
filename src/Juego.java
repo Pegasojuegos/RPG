@@ -5,8 +5,10 @@ public class Juego {
 	public static void main(String[] args) {
 		Personaje p0=new Personaje();
 		Equipo e3=new Equipo();
-		Personaje p1=new Personaje(10,"Mago",2,"fuego",p0.getAspectos(1));
-		Personaje p2=new Personaje(20,"Guerrero",8,"furia",p0.getAspectos(2));
+		Hechizo Fuego = new Hechizo("Llama del dragón");
+		Hechizo Furia = new Hechizo("Furia vikinga");
+		Personaje p1=new Personaje(10,"Mago",2, Fuego.getHechizo(),p0.getAspectos(1));
+		Personaje p2=new Personaje(20,"Guerrero",8,Furia.getHechizo(),p0.getAspectos(2));
 		Equipo e1=new Equipo();
 		e1.añadirMiembro(p1, 0);
 		e1.añadirMiembro(p2, 1);
@@ -41,7 +43,7 @@ public class Juego {
 				System.out.println();
 				//Muestra todos los hechizos disponibles
 				System.out.print("Hechizos: ");
-				for(String i:p0.getHechizo()) {
+				for(String i:p1.getHechizo()) {
 					System.out.print(i+" | ");
 				}
 				System.out.println();
@@ -51,7 +53,7 @@ public class Juego {
 				while (correcto==false) {
 					System.out.print("Hechizo conocido: ");
 					hechizo=s.nextLine();
-					for(String i:p0.getHechizo()) {
+					for(String i:p1.getHechizo()) {
 						if(i.equalsIgnoreCase(hechizo)) {
 							correcto=true;
 							break;
@@ -185,6 +187,7 @@ public class Juego {
 		boolean finJuego=false;
 		int numNivel=1;
 		Nivel nivel=new Nivel(numNivel,e3);
+		int ronda=1;
 		String opciónes="| Atacar | Hechizo | ";
 		while(finJuego==false) {
 			System.out.println(nivel);

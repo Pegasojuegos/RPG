@@ -8,7 +8,7 @@ public class Pruebas {
 		Equipo e1=new Equipo();
 		e1.añadirMiembro(p1, 0);
 		e1.añadirMiembro(p2, 1);
-		Nivel uno=new Nivel(3,e1);
+		Nivel uno=new Nivel(2,e1);
 		uno.atqEnem();
 		System.out.println(uno);
 		uno.atqEnem();
