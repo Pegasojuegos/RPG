@@ -38,7 +38,7 @@ public class Nivel {
 			res+="                                       ♥"+i.getVidaActual()+"\n";
 			res+=String.format("%100s\n\n", i.getAspecto());
 		}
-		res+="        ♥"+p1.getVidaActual()+"\n"+p1.getAspecto()+"        ♥"+p2.getVidaActual()+"\n"+p2.getAspecto();
+		res+="        ♥"+p1.getVidaActual()+"\n"+p1.getAspecto().substring(1)+"\n        ♥"+p2.getVidaActual()+"\n"+p2.getAspecto().substring(1);
 		return res;
 	}
 }
