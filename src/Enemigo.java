@@ -10,6 +10,21 @@ public class Enemigo {
 			     "                                                                            (ಠ益⁠ಠ)    Ξ\n"
 			+ "                                  [Ξ]={ Φ }=[Ξ]\n"
 			+ "                                   Ξ  Δ   Δ"};
+
+	private final String estados[]= {" ","╨"};
+	private int estadoNum;
+	public int getEstadoNum() {
+		return estadoNum;
+	}
+
+	public void setEstadoNum(int estadoNum) {
+		this.estadoNum = estadoNum;
+	}
+
+	public String getEstado() {
+		return estados[estadoNum];
+	}
+
 	public String getAspecto() {
 		return aspecto;
 	}
@@ -20,6 +35,7 @@ public class Enemigo {
 	private int vidaActual;
 	
 	public Enemigo(int lvl,Equipo e) {
+		estadoNum=0;
 		aspecto=aspectos[lvl-1];
 		int nivelarDaño=(e.getEquipoPos(0).getVida()+e.getEquipoPos(1).getVida()/2)/7;
 		int nivelarVida=(e.getEquipoPos(0).getAtaque()+e.getEquipoPos(1).getAtaque()/2)*14;

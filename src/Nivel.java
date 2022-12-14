@@ -50,7 +50,7 @@ public class Nivel {
 	public String toString() {
 		String res="";
 		for(Enemigo i:enemigos) {
-			res+="                                       ♥"+i.getVidaActual()+"\n";
+			res+="                                       ♥"+i.getVidaActual()+" "+i.getEstado()+"\n";
 			res+=String.format("%100s\n\n", i.getAspecto());
 		}
 		res+=pintaPersonaje(e1.getEquipoPos(0));
@@ -64,9 +64,15 @@ public class Nivel {
 			res+="\n         \n"+lápida;
 		}//if
 		else {
-			res+="\n        ♥"+p.getVidaActual()+"\n"+p.getAspecto().substring(1);
+			res+="\n        ♥"+p.getVidaActual()+" "+p.getEstado()+"\n"+p.getAspecto().substring(1);
 		}
 
 		return res;
 	}//pintaPersonaje
+
+	public Enemigo[] getEnemigos() {
+		return enemigos;
+	}
+	
+	
 	}

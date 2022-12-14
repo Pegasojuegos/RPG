@@ -7,6 +7,8 @@ public class Personaje {
 	private Hechizo hechizoAprendido;
 	private String aspecto;
 	private boolean vivo;
+	private final String estados[]= {"","○"};
+	private int estadoNum;
 	
 	private String aspectos[]={
 		    "\n       √°}\r\n"
@@ -31,10 +33,11 @@ public class Personaje {
 
 	//Nuevo personaje con datos dados
 	public Personaje(int vida,String nombre,int ataque,String hechizo,String aspecto) {
+		this.estadoNum=0;
 		this.vida=vida;
 		this.nombre=nombre;
 		this.ataque=ataque;
-		this.hechizo[0]=hechizo;
+		this.hechizoAprendido=new Hechizo(hechizo);
 		this.aspecto=aspecto;
 		this.vidaActual=vida;
 		vivo=true;
@@ -48,7 +51,7 @@ public class Personaje {
 	public String toString() {
 		return ""
 				+ "╭═════════ .✧"+nombre+"✧. ═════════╮\n"
-				+ "  "+vida+"♥"+"  Fuerza:"+ataque+"  "+verHechizos()+"\n"
+				+ "  "+vida+"♥"+"  Fuerza:"+ataque+"  "+hechizoAprendido.getHechizo()+"\n"
 				+ "    "+aspecto;
 	}
 	
@@ -125,12 +128,18 @@ public class Personaje {
 	}
 
 	public String[] getHechizo() {
-		return hechizo;
+		return hechizoAprendido.getLista();
+	}
+	public int getEstadoNum() {
+		return estadoNum;
+	}
+	public void setEstadoNum(int estadoNum) {
+		this.estadoNum = estadoNum;
+	}
+	public String getEstado() {
+		return estados[estadoNum];
 	}
 
-	public void setHechizo(String[] hechizo) {
-		this.hechizo = hechizo;
-	}
 	
 	
 }

@@ -41,7 +41,7 @@ public class Juego {
 				System.out.println();
 				//Muestra todos los hechizos disponibles
 				System.out.print("Hechizos: ");
-				for(String i:hechizos) {
+				for(String i:p0.getHechizo()) {
 					System.out.print(i+" | ");
 				}
 				System.out.println();
@@ -51,7 +51,7 @@ public class Juego {
 				while (correcto==false) {
 					System.out.print("Hechizo conocido: ");
 					hechizo=s.nextLine();
-					for(String i:hechizos) {
+					for(String i:p0.getHechizo()) {
 						if(i.equalsIgnoreCase(hechizo)) {
 							correcto=true;
 							break;

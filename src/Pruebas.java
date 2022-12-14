@@ -12,7 +12,9 @@ public class Pruebas {
 		uno.atqEnem();
 		System.out.println(uno);
 		uno.atqEnem();
+		uno.getEnemigos();
 		System.out.println(uno);
+		
 	}
 
 }
