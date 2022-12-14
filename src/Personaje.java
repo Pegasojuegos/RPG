@@ -4,7 +4,7 @@ public class Personaje {
 	private int vida;
 	private String nombre;
 	private int ataque;
-	private String hechizo[]=new String[1];
+	private Hechizo hechizoAprendido;
 	private String aspecto;
 	private boolean vivo;
 	
@@ -56,14 +56,9 @@ public class Personaje {
 		return vidaActual+"        ♥\n\n"+aspecto;
 	}
 	
-	private String verHechizos(){
-		String res="";
-		for(String i:hechizo) {
-			res+=" "+i+",";
-		}
-		return res.substring(0,res.length()-1);
+	public Hechizo getHechizoAprendido() {
+		return hechizoAprendido;
 	}
-	
 	//Curar o hacer daño
 	public void variarVida(int cantidad) {
 		vidaActual=vidaActual+cantidad;
@@ -81,6 +76,9 @@ public class Personaje {
 
 	public void setVidaActual(int vidaActual) {
 		this.vidaActual = vidaActual;
+		if(this.vidaActual<0) {
+			morir();
+		}
 	}
 
 	public String getAspecto() {

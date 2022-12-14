@@ -5,18 +5,17 @@ public class Juego {
 	public static void main(String[] args) {
 		Personaje p0=new Personaje();
 		Equipo e3=new Equipo();
-		String hechizos[]= {"Fuego","Sanación","Furia"};
 		Personaje p1=new Personaje(10,"Mago",2,"fuego",p0.getAspectos(1));
 		Personaje p2=new Personaje(20,"Guerrero",8,"furia",p0.getAspectos(2));
 		Equipo e1=new Equipo();
 		e1.añadirMiembro(p1, 0);
 		e1.añadirMiembro(p2, 1);
 		Equipo e2=new Equipo();
-		
+		String opciónesIniciales="| Nuevo personaje | Borrar personaje | Ver equipo | Jugar |";
 		int personajes=0;
 		
 		Scanner s= new Scanner(System.in);
-		System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+		System.out.println(opciónesIniciales);
 		String operación=s.nextLine();
 		boolean inicio=false;
 		while(inicio==false) {
@@ -78,7 +77,7 @@ public class Juego {
 				
 				
 				//Pide siguiente operación
-				System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+				System.out.println(opciónesIniciales);
 				operación=s.nextLine();
 				break;
 				
@@ -98,20 +97,20 @@ public class Juego {
 							if(i.getNombre().equalsIgnoreCase(nomb)) {
 								i=null;
 								System.out.println(nomb+" ha sido borrado correctamente");
-								System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+								System.out.println(opciónesIniciales);
 								operación=s.nextLine();
 								break;
 							}
 							else {
 								System.out.println(nomb+" no esta en el equipo");
-								System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+								System.out.println(opciónesIniciales);
 								operación=s.nextLine();
 							}
 						}else
 							if(cont<2) cont++;
 							else {
 								System.out.println("Falta personaje");
-								System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+								System.out.println(opciónesIniciales);
 								operación=s.nextLine();
 							}
 					}//fori
@@ -120,7 +119,7 @@ public class Juego {
 					
 					if(conf.equalsIgnoreCase("no")) {//Cancelar borrado
 						System.out.println("Borrado de "+nomb+" cancelado");
-						System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+						System.out.println(opciónesIniciales);
 						operación=s.nextLine();
 					}//ifno
 					else {
@@ -134,7 +133,7 @@ public class Juego {
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 				//Escribe el equipo por pantalla con el método toString de Equipo
 				System.out.println(e2);
-				System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+				System.out.println(opciónesIniciales);
 				operación=s.nextLine();
 				break;
 				
@@ -159,7 +158,7 @@ public class Juego {
 					}//ifsi
 					else {
 						if(confir.equalsIgnoreCase("no")) {
-							System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+							System.out.println(opciónesIniciales);
 							operación=s.nextLine();
 							break;
 						}//ifno
@@ -177,13 +176,20 @@ public class Juego {
 			default:
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 				System.out.println("Operación no válida");
-				System.out.println("| Nuevo personaje | Borrar personaje | Ver personaje | Jugar |");
+				System.out.println(opciónesIniciales);
 				operación=s.nextLine();
 			}//switch
 		}//while
 		
 		//Empiza el juego
-		
+		boolean finJuego=false;
+		int numNivel=1;
+		Nivel nivel=new Nivel(numNivel,e3);
+		String opciónes="| Atacar | Hechizo | ";
+		while(finJuego==false) {
+			System.out.println(nivel);
+			
+		}//finJuego
 	}
 	
 

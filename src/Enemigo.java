@@ -19,10 +19,13 @@ public class Enemigo {
 	private int vida;
 	private int vidaActual;
 	
-	public Enemigo(int lvl) {
-		aspecto=aspectos[lvl];
-		vida=(int) (Math.random()*(lvl*30))+lvl*20;
-		daño=(int) (Math.random()*(lvl*7))+lvl*5;
+	public Enemigo(int lvl,Equipo e) {
+		aspecto=aspectos[lvl-1];
+		int nivelarDaño=(e.getEquipoPos(0).getVida()+e.getEquipoPos(1).getVida()/2)/7;
+		int nivelarVida=(e.getEquipoPos(0).getAtaque()+e.getEquipoPos(1).getAtaque()/2)*14;
+
+		vida=(int) (Math.random()*(lvl*nivelarVida))+lvl*nivelarVida/2;
+		daño=(int) (Math.random()*(lvl*nivelarDaño))+lvl*nivelarDaño/2;
 		vidaActual=vida;
 	}
 

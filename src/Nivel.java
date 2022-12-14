@@ -3,20 +3,23 @@ public class Nivel {
 	private int númeroNivel;
 	private int númeroEnemigos;
 	private Enemigo enemigos[];
-	private Personaje p1;
-	private Personaje p2;
+	private Equipo e1=new Equipo();
+	private String lápida=""
+			+ "      _____\n"
+			+ "     |R.I.P|\n"
+			+ "     |     |\n"		
+			+ "    ~~~~~~~~~\n";
 	
-	public Nivel(int númeroNivel,Personaje p1,Personaje p2) {
+	public Nivel(int númeroNivel,Equipo e1) {
 		this.númeroNivel=númeroNivel;
-		this.p1=p1;
-		this.p2=p2;
+		this.e1=e1;
 		númeroEnemigos=númeroNivel;
 		if(númeroEnemigos>2) {
 			númeroEnemigos=1;
 		}//if
 		enemigos=new Enemigo[númeroEnemigos];
 		for(int i=0;i<númeroEnemigos;i++) {
-			enemigos[i]=new Enemigo(númeroNivel-1);
+			enemigos[i]=new Enemigo(númeroNivel,e1);
 		}//fori
 	}//Nivel
 	
@@ -24,13 +27,25 @@ public class Nivel {
 		for(int i=0;i<enemigos.length;i++) {
 			int objetivo=(int) (Math.random()*10)+1;
 			if(objetivo<5) {
-				p1.setVidaActual(p1.getVidaActual()-enemigos[i].getDaño());
+				daño(e1.getEquipoPos(0),i);
 			}//atq a p1
 			else {
-				p2.setVidaActual(p2.getVidaActual()-enemigos[i].getDaño());
+				daño(e1.getEquipoPos(1),i);
 			}//atq a p
 		}
 	}//atqEnem
+	
+	private void daño(Personaje p,int i) {
+		//Si el golpe te mata y tenías más de uno de vida, te de una te deja a uno de vida
+		if(p.getVidaActual()>1) {
+		p.setVidaActual(p.getVidaActual()-enemigos[i].getDaño());
+		
+			if(p.getVidaActual()<1) {
+				p.setVidaActual(1);
+			}//if
+		}//if
+		else p.setVidaActual(0);
+	}
 	
 	public String toString() {
 		String res="";
@@ -38,7 +53,20 @@ public class Nivel {
 			res+="                                       ♥"+i.getVidaActual()+"\n";
 			res+=String.format("%100s\n\n", i.getAspecto());
 		}
-		res+="        ♥"+p1.getVidaActual()+"\n"+p1.getAspecto().substring(1)+"\n        ♥"+p2.getVidaActual()+"\n"+p2.getAspecto().substring(1);
+		res+=pintaPersonaje(e1.getEquipoPos(0));
+		res+=pintaPersonaje(e1.getEquipoPos(1));
 		return res;
 	}
-}
+	
+	private String pintaPersonaje(Personaje p) {
+		String res="";
+		if(p.getVidaActual()<1) {
+			res+="\n         \n"+lápida;
+		}//if
+		else {
+			res+="\n        ♥"+p.getVidaActual()+"\n"+p.getAspecto().substring(1);
+		}
+
+		return res;
+	}//pintaPersonaje
+	}

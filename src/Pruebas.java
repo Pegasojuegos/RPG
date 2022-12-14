@@ -5,7 +5,13 @@ public class Pruebas {
 		Personaje p0=new Personaje();
 		Personaje p1=new Personaje(10,"Mago",2,"fuego",p0.getAspectos(1));
 		Personaje p2=new Personaje(20,"Guerrero",8,"furia",p0.getAspectos(2));
-		Nivel uno=new Nivel(3,p1,p2);
+		Equipo e1=new Equipo();
+		e1.añadirMiembro(p1, 0);
+		e1.añadirMiembro(p2, 1);
+		Nivel uno=new Nivel(3,e1);
+		uno.atqEnem();
+		System.out.println(uno);
+		uno.atqEnem();
 		System.out.println(uno);
 	}
 
