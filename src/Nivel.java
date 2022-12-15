@@ -1,8 +1,13 @@
 
 public class Nivel {
+	private int numRonda=1;
+	public int getNumRonda() {
+		return numRonda;
+	}
+
 	private int númeroNivel;
 	private int númeroEnemigos;
-	private Enemigo enemigos[];
+	private static Enemigo enemigos[];
 	private Equipo e1=new Equipo();
 	private String lápida=""
 			+ "      _____\n"
@@ -25,14 +30,31 @@ public class Nivel {
 	
 	public void atqEnem() {
 		for(int i=0;i<enemigos.length;i++) {
-			int objetivo=(int) (Math.random()*10)+1;
-			if(objetivo<5) {
-				daño(e1.getEquipoPos(0),i);
-			}//atq a p1
-			else {
-				daño(e1.getEquipoPos(1),i);
-			}//atq a p
-		}
+			if(enemigos[i].getEstadoNum()!=2) {
+				int objetivo=(int) (Math.random()*10)+1;
+				if(objetivo<5) {
+					//Compreuba que no tiene un escudo y si lo teine no ataca pero se lo quita
+					if(e1.getEquipoPos(0).getEstadoNum()!=1) {
+						daño(e1.getEquipoPos(0),i);
+					}else e1.getEquipoPos(0).setEstadoNum(0);
+				}//atq a p1
+				else {
+					if(e1.getEquipoPos(1).getEstadoNum()!=1) {
+						daño(e1.getEquipoPos(1),i);
+					}else e1.getEquipoPos(1).setEstadoNum(0);
+				}//atq a p
+			}//ifNoEnamorado
+			//si lo está no atacará y dejará de estarlo
+			else enemigos[i].setEstadoNum(0);
+			if(enemigos[i].getEstadoNum()==1) {
+				if(enemigos[i].getContEstado()>0) {
+					enemigos[i].setVidaActual((int) (enemigos[i].getVidaActual()-(enemigos[i].getVida()*0.05)));
+					enemigos[i].setContEstado(enemigos[i].getContEstado()-1);
+				}
+				else enemigos[i].setEstadoNum(0);
+			}
+		}//for
+		numRonda++;
 	}//atqEnem
 	
 	private void daño(Personaje p,int i) {
@@ -72,6 +94,14 @@ public class Nivel {
 
 	public Enemigo[] getEnemigos() {
 		return enemigos;
+	}
+
+	public Equipo getE1() {
+		return e1;
+	}
+
+	public int getNúmeroNivel() {
+		return númeroNivel;
 	}
 	
 	

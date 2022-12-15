@@ -1,6 +1,6 @@
 
 public class Hechizo {
-	private final String lista[]={"Llama del dragón","Sanación","Beso de la muerte","Furia vikinga","Caelestis protector"};
+	public static final String lista[]={"Llama del dragón","Sanación","Beso de la muerte","Furia vikinga","Caelestis protector"};
 	private int numHechizo;
 	
 
@@ -12,23 +12,25 @@ public class Hechizo {
 		}//for
 	}//Hechizo
 
-	public void usarHechizoEnemigo(Enemigo Enemigo) {
+	public void usarHechizoEnemigo(Enemigo enemigo,Nivel lvl) {
 		switch(numHechizo) {
 		case 0://Llama del dragón
-				
+			enemigo.setEstadoNum(1);
+			enemigo.setContEstado(3);
 		case 2://Beso de la muerte
-						
+			enemigo.setEstadoNum(2);
 		}
 	}
 	
-	public void usarHechizoAliado(Personaje Aliado) {
+	public void usarHechizoAliado(Personaje aliado,Nivel lvl) {
 		switch(numHechizo) {
 			
 		case 1://Sanación
-			Aliado.setVidaActual(Aliado.getVidaActual()+((int)(Aliado.getVida()*0.25)));
+			aliado.setVidaActual(aliado.getVidaActual()+((int)(aliado.getVida()*0.25)));
 		case 3://Furia vikinga
-			
+			aliado.setEstadoNum(2);
 		case 4://Caelestis protector
+			aliado.setEstadoNum(1);
 		}
 	}
 	
@@ -44,5 +46,8 @@ public class Hechizo {
 		return lista[numHechizo];
 	}
 	
+	public static String selectHechizo(int n) {
+		return lista[n];
+	}
 	
 }

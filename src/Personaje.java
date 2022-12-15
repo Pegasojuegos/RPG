@@ -7,10 +7,10 @@ public class Personaje {
 	private Hechizo hechizoAprendido;
 	private String aspecto;
 	private boolean vivo;
-	private final String estados[]= {"","○"};
+	private final String estados[]= {"","○","奭"};
 	private int estadoNum;
 	
-	private String aspectos[]={
+	private static final String aspectos[]={
 		    "\n       √°}\r\n"
 			+ "       [|]\\•\r\n"
 			+ "        |\n",
@@ -24,10 +24,10 @@ public class Personaje {
 			+ "      /  |. |\n",
 	};
 	
-	public String getAspectos(int n) {
+	public static String selecAspecto(int n) {
 		return aspectos[n];
 	}
-	public String[] getListaAspectos() {
+	public static String[] getListaAspectos() {
 		return aspectos;
 	}
 
@@ -120,7 +120,12 @@ public class Personaje {
 	}
 
 	public int getAtaque() {
-		return ataque;
+		int atq=ataque;
+		if(estadoNum==2) {
+			atq=(int) (atq+atq*0.5);
+			estadoNum=0;
+		}
+		return atq;
 	}
 
 	public void setAtaque(int ataque) {

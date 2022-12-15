@@ -3,12 +3,9 @@ import java.util.Scanner;
 public class Juego {
 
 	public static void main(String[] args) {
-		Personaje p0=new Personaje();
 		Equipo e3=new Equipo();
-		Hechizo Fuego = new Hechizo("Llama del dragón");
-		Hechizo Furia = new Hechizo("Furia vikinga");
-		Personaje p1=new Personaje(10,"Mago",2, Fuego.getHechizo(),p0.getAspectos(1));
-		Personaje p2=new Personaje(20,"Guerrero",8,Furia.getHechizo(),p0.getAspectos(2));
+		Personaje p1=new Personaje(10,"Mago",2, Hechizo.selectHechizo(0),Personaje.selecAspecto(2));
+		Personaje p2=new Personaje(20,"Guerrero",8,Hechizo.selectHechizo(3),Personaje.selecAspecto(1));
 		Equipo e1=new Equipo();
 		e1.añadirMiembro(p1, 0);
 		e1.añadirMiembro(p2, 1);
@@ -62,9 +59,9 @@ public class Juego {
 					System.out.println("Hechizo erróneo");
 				}
 				//Muestra los aspectos disponibles
-				for(int i=0;i<p0.getListaAspectos().length;i++) {
+				for(int i=0;i<Personaje.getListaAspectos().length;i++) {
 					System.out.println("•------|"+(i+1)+"|------•");
-					System.out.println(p0.getAspectos(i));
+					System.out.println(Personaje.selecAspecto(i));
 				}
 				System.out.print("Aspecto: ");
 				int aspecto=s.nextInt()-1;
@@ -72,7 +69,7 @@ public class Juego {
 				
 				
 				//creo el nuevo personaje
-				e2.añadirMiembro(new Personaje(vida,nombre,daño,hechizo,p0.getAspectos(aspecto)), personajes);
+				e2.añadirMiembro(new Personaje(vida,nombre,daño,hechizo,Personaje.selecAspecto(aspecto)), personajes);
 				System.out.println("¡"+nombre+" se ha unido al equipo!");
 				personajes++;
 				}
@@ -187,12 +184,39 @@ public class Juego {
 		boolean finJuego=false;
 		int numNivel=1;
 		Nivel nivel=new Nivel(numNivel,e3);
-		int ronda=1;
 		String opciónes="| Atacar | Hechizo | ";
 		while(finJuego==false) {
 			System.out.println(nivel);
-			
+		
 		}//finJuego
+	
+		
+	}//main
+	
+	public static void atacar(Personaje atacante,Nivel lvl) {
+		int objetivo=0;
+		if(lvl.getNúmeroNivel()==2) {
+			System.out.println("Enemigo:");
+			Scanner s=new Scanner(System.in);
+			objetivo=s.nextInt();
+		}
+		lvl.getEnemigos()[objetivo].setVidaActual(lvl.getEnemigos()[objetivo].getVidaActual()-atacante.getAtaque());
+		System.out.println(lvl);
+	}//atacar
+	
+	public static void hechizar(Personaje atacante,Nivel lvl,Equipo e) {
+		int objetivo;
+		System.out.println("Objetivo:");
+		Scanner s=new Scanner(System.in);
+		objetivo=s.nextInt();
+		String hechizoAUsar=atacante.getHechizoAprendido().getHechizo();
+		//Si es un echizo a un aliado
+		if(hechizoAUsar.equals((Hechizo.selectHechizo(1)))|(hechizoAUsar.equals((Hechizo.selectHechizo(3)))|(hechizoAUsar.equals((Hechizo.selectHechizo(4)))))){
+			atacante.getHechizoAprendido().usarHechizoAliado(e.getEquipoPos(objetivo), lvl);
+		}//if aliado
+		if(hechizoAUsar.equals((Hechizo.selectHechizo(0)))|(hechizoAUsar.equals((Hechizo.selectHechizo(2))))){
+			atacante.getHechizoAprendido().usarHechizoEnemigo(lvl.getEnemigos()[objetivo], lvl);
+		}//if aliado
 	}
 	
 

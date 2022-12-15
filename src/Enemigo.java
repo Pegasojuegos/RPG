@@ -1,6 +1,6 @@
 
 public class Enemigo {
-	private String aspectos[]= {
+	private final String aspectos[]= {
 			  "                                      (°U°)\n"
 			+ "                                      τ(θ)τ\n"
 			+ "                                       ωωω",
@@ -11,10 +11,19 @@ public class Enemigo {
 			+ "                                  [Ξ]={ Φ }=[Ξ]\n"
 			+ "                                   Ξ  Δ   Δ"};
 
-	private final String estados[]= {" ","╨"};
+	private final String estados[]= {" ","╨","❦"};
 	private int estadoNum;
 	public int getEstadoNum() {
 		return estadoNum;
+	}
+	private int contEstado;
+	
+	public int getContEstado() {
+		return contEstado;
+	}
+
+	public void setContEstado(int contEstado) {
+		this.contEstado = contEstado;
 	}
 
 	public void setEstadoNum(int estadoNum) {
@@ -24,6 +33,7 @@ public class Enemigo {
 	public String getEstado() {
 		return estados[estadoNum];
 	}
+
 
 	public String getAspecto() {
 		return aspecto;
