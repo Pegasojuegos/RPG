@@ -28,7 +28,7 @@ public class Nivel {
 		}//fori
 	}//Nivel
 	
-	public void atqEnem() {
+	public void ronda() {
 		for(int i=0;i<enemigos.length;i++) {
 			if(enemigos[i].getEstadoNum()!=2) {
 				int objetivo=(int) (Math.random()*10)+1;
@@ -82,7 +82,7 @@ public class Nivel {
 	
 	private String pintaPersonaje(Personaje p) {
 		String res="";
-		if(p.getVidaActual()<1) {
+		if(p.isVivo()==false) {
 			res+="\n         \n"+lápida;
 		}//if
 		else {
@@ -94,10 +94,6 @@ public class Nivel {
 
 	public Enemigo[] getEnemigos() {
 		return enemigos;
-	}
-
-	public Equipo getE1() {
-		return e1;
 	}
 
 	public int getNúmeroNivel() {

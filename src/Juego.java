@@ -146,7 +146,7 @@ public class Juego {
 						contador++;
 					}
 				}
-				if(contador<0) {
+				if(contador>0) {
 					//si el equipo no está completo te da opción de usar uno por defécto
 					System.out.println("Equipo incompleto. ¿Deseas continuar con el equipo por defecto?");
 					String confir=s.nextLine();
@@ -184,14 +184,51 @@ public class Juego {
 		boolean finJuego=false;
 		int numNivel=1;
 		Nivel nivel=new Nivel(numNivel,e3);
-		String opciónes="| Atacar | Hechizo | ";
+		int enemDerrotados=0;
+		int opción;
 		while(finJuego==false) {
 			System.out.println(nivel);
-		
+			for(Personaje p:e3.getEquipo()) {
+				opción=opciones(p);
+				if(opción==1) atacar(p,nivel);
+				if(opción==2) hechizar(p, nivel, e3);
+			}//for Acciones personajes
+			nivel.ronda();
+			for(Enemigo en:nivel.getEnemigos()) {
+				if(en.getVidaActual()<1) {
+					enemDerrotados++;
+				}
+			}//for enemDerrotados
+			
+			if(enemDerrotados==nivel.getEnemigos().length) {
+				numNivel++;
+				descansar(e3);
+				nivel=new Nivel(numNivel,e3);
+			}
 		}//finJuego
 	
 		
 	}//main
+	
+	public static void descansar(Equipo e) {
+		e.Descanso();
+		System.out.println(e.getEquipoPos(0).getAspecto()+""
+				+ "\n                ░"
+				+ "\n                ω"
+				+ "\n               ===\n"+e.getEquipoPos(1).getAspecto());
+		System.out.println("| Siguiente nivel |");
+		Scanner s=new Scanner(System.in);
+		s.nextLine();
+	}
+	
+	public static int opciones(Personaje p) {
+		System.out.printf("• %s\n    └➔Atacar\n    └➔%s",p.getNombre(),p.getHechizoAprendido().getHechizo());
+		Scanner s=new Scanner(System.in);
+		int res=s.nextInt();
+		while(res!=1&res!=2) res=s.nextInt();
+		
+		return res;
+	}
 	
 	public static void atacar(Personaje atacante,Nivel lvl) {
 		int objetivo=0;
@@ -208,7 +245,7 @@ public class Juego {
 		int objetivo;
 		System.out.println("Objetivo:");
 		Scanner s=new Scanner(System.in);
-		objetivo=s.nextInt();
+		objetivo=s.nextInt()-1;
 		String hechizoAUsar=atacante.getHechizoAprendido().getHechizo();
 		//Si es un echizo a un aliado
 		if(hechizoAUsar.equals((Hechizo.selectHechizo(1)))|(hechizoAUsar.equals((Hechizo.selectHechizo(3)))|(hechizoAUsar.equals((Hechizo.selectHechizo(4)))))){
@@ -217,7 +254,9 @@ public class Juego {
 		if(hechizoAUsar.equals((Hechizo.selectHechizo(0)))|(hechizoAUsar.equals((Hechizo.selectHechizo(2))))){
 			atacante.getHechizoAprendido().usarHechizoEnemigo(lvl.getEnemigos()[objetivo], lvl);
 		}//if aliado
+		System.out.println(lvl);
+
 	}
-	
+
 
 }

@@ -12,6 +12,14 @@ public class Equipo {
 		return res.toString();
 	}
 	
+	//Curar toda la vida y revive al equipo
+		public void Descanso(){
+			for(Personaje p:equipo) {
+				p.setVidaActual(p.getVida());
+				p.setVivo(true);
+			}//for
+		}
+	
 	public Personaje[] getEquipo() {
 		return equipo;
 	}

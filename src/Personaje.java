@@ -97,18 +97,23 @@ public class Personaje {
 		vivo=false;
 	}
 	
-	//Curar toda la vida y revive al personaje
-	public void Descanso(){
-		vidaActual=vida;
-		vivo=true;
-	}
+	
 
+	public boolean isVivo() {
+		return vivo;
+	}
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
 	public int getVida() {
 		return vida;
 	}
 
 	public void setVida(int vida) {
 		this.vida = vida;
+		if(this.vida<1) {
+			morir();
+		}
 	}
 
 	public String getNombre() {

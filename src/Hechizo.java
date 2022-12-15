@@ -17,8 +17,10 @@ public class Hechizo {
 		case 0://Llama del dragón
 			enemigo.setEstadoNum(1);
 			enemigo.setContEstado(3);
+			break;
 		case 2://Beso de la muerte
 			enemigo.setEstadoNum(2);
+			break;
 		}
 	}
 	
@@ -27,10 +29,13 @@ public class Hechizo {
 			
 		case 1://Sanación
 			aliado.setVidaActual(aliado.getVidaActual()+((int)(aliado.getVida()*0.25)));
+			break;
 		case 3://Furia vikinga
 			aliado.setEstadoNum(2);
+			break;
 		case 4://Caelestis protector
 			aliado.setEstadoNum(1);
+			break;
 		}
 	}
 	
