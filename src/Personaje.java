@@ -12,16 +12,16 @@ public class Personaje {
 	
 	private static final String aspectos[]={
 		    "\n       √°}\r\n"
-			+ "       [|]\\•\r\n"
+			+ "       \033[35m[\u001B[0m|\033[35m]\u001B[0m\\\033[32m•\u001B[0m\r\n"
 			+ "        |\n",
 			
-			"\n      | •|  /   \r\n"
-			+ "      ( |)\\/\r\n"
-			+ "        |,\n",
+			"\n      \033[34m|\u001B[0m •\033[34m|\u001B[0m  \033[31m/\u001B[0m   \r\n"
+			+ "      \033[34m( |)\\\u001B[0m\033[31m/\u001B[0m\r\n"
+			+ "        \033[34m|,\u001B[0m\n",
 			
-	 		"\n        (°} ☼\r\n"
-			+ "       /[|]\\|\r\n"
-			+ "      /  |. |\n",
+	 		"\n        (°} \033[36m☼\u001B[0m\r\n"
+			+ "       \033[35m/\u001B[0m\033[31m[\u001B[0m|\033[31m]\u001B[0m\\\033[32m|\u001B[0m\r\n"
+			+ "      \033[35m/\u001B[0m  |. \033[32m|\u001B[0m\n",
 	};
 	
 	public static String selecAspecto(int n) {
@@ -51,7 +51,7 @@ public class Personaje {
 	public String toString() {
 		return ""
 				+ "╭═════════ .✧"+nombre+"✧. ═════════╮\n"
-				+ "  "+vida+"♥"+"  Fuerza:"+ataque+"  "+hechizoAprendido.getHechizo()+"\n"
+				+ "  \033[31m"+vida+"♥\u001B[0m"+"  Fuerza:"+ataque+"  "+hechizoAprendido.getHechizo()+"\n"
 				+ "    "+aspecto;
 	}
 	

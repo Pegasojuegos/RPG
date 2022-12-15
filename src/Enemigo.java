@@ -1,15 +1,16 @@
 
 public class Enemigo {
 	private final String aspectos[]= {
-			  "                                      (°U°)\n"
-			+ "                                      τ(θ)τ\n"
-			+ "                                       ωωω",
-			  "                                      ξ•)\n"
+			  "                                      \033[34m(\033[32m°\033[34mU\033[32m°\033[34m)\n"
+			+ "                                      τ(\033[32mθ\033[34m)τ\n"
+			+ "                                       ωωω\u001B[0m",
+			  "                                      \033[33mξ\033[31m•\033[33m)\n"
 			+ "                                      (ΞΞΞ)φ\n"
-			+ "                                       Γ Γ",
-			     "                                                                            (ಠ益⁠ಠ)    Ξ\n"
-			+ "                                  [Ξ]={ Φ }=[Ξ]\n"
-			+ "                                   Ξ  Δ   Δ"};
+			+ "                                       Γ Γ\u001B[0m",
+			  "                                      \033[35m(ಠ益⁠ಠ)   \033[36mΞ\n"
+			+ "                                  [\033[36mΞ\033[35m]={ \033[34mΦ\033[35m }=[\033[36mΞ\033[35m]\n"
+			+ "                                   \033[36mΞ\033[35m  Δ   Δ\u001B[0m"};
+	private boolean vivo;
 
 	private final String estados[]= {" ","╨","❦"};
 	private int estadoNum;
@@ -45,6 +46,7 @@ public class Enemigo {
 	private int vidaActual;
 	
 	public Enemigo(int lvl,Equipo e) {
+		vivo=true;
 		estadoNum=0;
 		aspecto=aspectos[lvl-1];
 		int nivelarDaño=(e.getEquipoPos(0).getVida()+e.getEquipoPos(1).getVida()/2)/7;
@@ -61,6 +63,13 @@ public class Enemigo {
 
 	public void setVidaActual(int vidaActual) {
 		this.vidaActual = vidaActual;
+		if(this.vidaActual<1) {
+			vivo=false;
+		}
+	}
+
+	public boolean isVivo() {
+		return vivo;
 	}
 
 	public int getDaño() {

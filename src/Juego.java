@@ -21,7 +21,6 @@ public class Juego {
 			switch (operación) {		
 			//Añadir un nuevo personaje al equipo
 			case "Nuevo personaje":
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 				if (personajes<=2) {
 				
 					
@@ -138,7 +137,6 @@ public class Juego {
 				
 				
 			case "Jugar":
-				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 				int contador=0;
 				//Comprueba si se ha completado el quipo
 				for(Personaje i:e2.getEquipo()) {
@@ -189,9 +187,11 @@ public class Juego {
 		while(finJuego==false) {
 			System.out.println(nivel);
 			for(Personaje p:e3.getEquipo()) {
+				if(p.isVivo()) {//Para que si no esta vivo no pueda atacar
 				opción=opciones(p);
 				if(opción==1) atacar(p,nivel);
 				if(opción==2) hechizar(p, nivel, e3);
+				}//if vivo
 			}//for Acciones personajes
 			nivel.ronda();
 			for(Enemigo en:nivel.getEnemigos()) {
@@ -205,6 +205,10 @@ public class Juego {
 				descansar(e3);
 				nivel=new Nivel(numNivel,e3);
 			}
+			if (nivel.getNúmeroNivel()>3) {
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n                                 ¡Victória!\n\n\n\n\n\n\n");
+				finJuego=true;
+			};
 		}//finJuego
 	
 		
@@ -212,10 +216,10 @@ public class Juego {
 	
 	public static void descansar(Equipo e) {
 		e.Descanso();
-		System.out.println(e.getEquipoPos(0).getAspecto()+""
-				+ "\n                ░"
-				+ "\n                ω"
-				+ "\n               ===\n"+e.getEquipoPos(1).getAspecto());
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+e.getEquipoPos(0).getAspecto()+""
+				+ "\n                \u001B[0m░"
+				+ "\n                \033[31mω"
+				+ "\n               \033[33m===\u001B[0m\n"+e.getEquipoPos(1).getAspecto());
 		System.out.println("| Siguiente nivel |");
 		Scanner s=new Scanner(System.in);
 		s.nextLine();
@@ -235,7 +239,7 @@ public class Juego {
 		if(lvl.getNúmeroNivel()==2) {
 			System.out.println("Enemigo:");
 			Scanner s=new Scanner(System.in);
-			objetivo=s.nextInt();
+			objetivo=s.nextInt()-1;
 		}
 		lvl.getEnemigos()[objetivo].setVidaActual(lvl.getEnemigos()[objetivo].getVidaActual()-atacante.getAtaque());
 		System.out.println(lvl);

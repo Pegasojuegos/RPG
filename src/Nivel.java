@@ -9,11 +9,15 @@ public class Nivel {
 	private int númeroEnemigos;
 	private static Enemigo enemigos[];
 	private Equipo e1=new Equipo();
-	private String lápida=""
+	private String lápida[]={""
 			+ "      _____\n"
 			+ "     |R.I.P|\n"
 			+ "     |     |\n"		
-			+ "    ~~~~~~~~~\n";
+			+ "    ~~~~~~~~~\n",
+			  "                                        _____\n"
+			+ "                                       |R.I.P|\n"
+			+ "                                       |     |\n"		
+			+ "                                      ~~~~~~~~~\n"};
 	
 	public Nivel(int númeroNivel,Equipo e1) {
 		this.númeroNivel=númeroNivel;
@@ -35,12 +39,17 @@ public class Nivel {
 				if(objetivo<5) {
 					//Compreuba que no tiene un escudo y si lo teine no ataca pero se lo quita
 					if(e1.getEquipoPos(0).getEstadoNum()!=1) {
-						daño(e1.getEquipoPos(0),i);
+						//Comprueba que esta vivo y sino ataca al otro
+						if(e1.getEquipoPos(0).isVivo()) {
+							daño(e1.getEquipoPos(0),i);
+						}else daño(e1.getEquipoPos(1),i);
 					}else e1.getEquipoPos(0).setEstadoNum(0);
 				}//atq a p1
 				else {
 					if(e1.getEquipoPos(1).getEstadoNum()!=1) {
-						daño(e1.getEquipoPos(1),i);
+						if(e1.getEquipoPos(1).isVivo()) {
+							daño(e1.getEquipoPos(1),i);
+						}else daño(e1.getEquipoPos(0),i);
 					}else e1.getEquipoPos(1).setEstadoNum(0);
 				}//atq a p
 			}//ifNoEnamorado
@@ -70,10 +79,15 @@ public class Nivel {
 	}
 	
 	public String toString() {
-		String res="";
+		String res="\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 		for(Enemigo i:enemigos) {
-			res+="                                       ♥"+i.getVidaActual()+" "+i.getEstado()+"\n";
-			res+=String.format("%100s\n\n", i.getAspecto());
+			if(i.isVivo()==false) {
+				res+="\n         \n"+lápida[1];
+			}//if
+			else {
+				res+="                                       \033[31m♥"+i.getVidaActual()+"\u001B[0m "+i.getEstado()+"\n";
+				res+=String.format("%100s\n\n", i.getAspecto());
+			}
 		}
 		res+=pintaPersonaje(e1.getEquipoPos(0));
 		res+=pintaPersonaje(e1.getEquipoPos(1));
@@ -83,10 +97,10 @@ public class Nivel {
 	private String pintaPersonaje(Personaje p) {
 		String res="";
 		if(p.isVivo()==false) {
-			res+="\n         \n"+lápida;
+			res+="\n         \n"+lápida[0];
 		}//if
 		else {
-			res+="\n        ♥"+p.getVidaActual()+" "+p.getEstado()+"\n"+p.getAspecto().substring(1);
+			res+="\n        \033[31m♥"+p.getVidaActual()+"\u001B[0m "+p.getEstado()+"\n"+p.getAspecto().substring(1);
 		}
 
 		return res;
