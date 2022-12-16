@@ -12,7 +12,7 @@ public class Enemigo {
 			+ "                                   \033[36mΞ\033[35m  Δ   Δ\u001B[0m"};
 	private boolean vivo;
 
-	private final String estados[]= {" ","╨","❦"};
+	private final String estados[]= {" ","\033[31m╨\u001B[0m","❦\u001B[0m"};
 	private int estadoNum;
 	public int getEstadoNum() {
 		return estadoNum;
@@ -51,9 +51,12 @@ public class Enemigo {
 		aspecto=aspectos[lvl-1];
 		int nivelarDaño=(e.getEquipoPos(0).getVida()+e.getEquipoPos(1).getVida()/2)/7;
 		int nivelarVida=(e.getEquipoPos(0).getAtaque()+e.getEquipoPos(1).getAtaque()/2)*14;
-
 		vida=(int) (Math.random()*(lvl*nivelarVida))+lvl*nivelarVida/2;
 		daño=(int) (Math.random()*(lvl*nivelarDaño))+lvl*nivelarDaño/2;
+		if(lvl==2) {
+			vida=vida/2;
+			daño=daño/2;
+		};
 		vidaActual=vida;
 	}
 

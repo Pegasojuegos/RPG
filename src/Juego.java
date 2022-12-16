@@ -201,10 +201,11 @@ public class Juego {
 			}//for enemDerrotados
 			
 			if(enemDerrotados==nivel.getEnemigos().length) {
+				enemDerrotados=0;
 				numNivel++;
 				descansar(e3);
 				nivel=new Nivel(numNivel,e3);
-			}
+			}else enemDerrotados=0;
 			if (nivel.getNúmeroNivel()>3) {
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n                                 ¡Victória!\n\n\n\n\n\n\n");
 				finJuego=true;
@@ -226,7 +227,7 @@ public class Juego {
 	}
 	
 	public static int opciones(Personaje p) {
-		System.out.printf("• %s\n    └➔Atacar\n    └➔%s",p.getNombre(),p.getHechizoAprendido().getHechizo());
+		System.out.printf("• %s\n    └➔Atacar\n    └➔%s\n    └:",p.getNombre(),p.getHechizoAprendido().getHechizo());
 		Scanner s=new Scanner(System.in);
 		int res=s.nextInt();
 		while(res!=1&res!=2) res=s.nextInt();

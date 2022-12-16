@@ -43,8 +43,7 @@ public class Personaje {
 		vivo=true;
 	}
 	
-	//Nuevo personaje sin datos
-	public Personaje() {}
+	
 	
 
 
@@ -79,7 +78,7 @@ public class Personaje {
 
 	public void setVidaActual(int vidaActual) {
 		this.vidaActual = vidaActual;
-		if(this.vidaActual<0) {
+		if(this.vidaActual<=0) {
 			morir();
 		}
 	}
