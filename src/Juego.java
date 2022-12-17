@@ -14,6 +14,37 @@ public class Juego {
 		int personajes=0;
 		
 		Scanner s= new Scanner(System.in);
+		System.out.println(""
+				+ "Al principio eran unos simples monstruos que no representaban una gran amenaza,\n"
+				+ "pero en los últimos años han ido aumentando su fuerza y cada vez son más frecuentes\n"
+				+ "las desapariciónes de campesinos debida a estos montruos denominados Clucks.\n"
+				+ "Los habitantes de Ulkar buscan desesperados ayuda por todos los reinos pero al ser\n"
+				+ "un pequeña aldea sin gran importancia económica todos hacen caso omiso a su petición.\n"
+				+ "Tú y tu fiel compañero habéis escuchado sobre su petición de ayuda y decidís acercaros\n"
+				+ "a la aldea para prestar vuestra ayuda y conseguir una buena recompensa, pues no creéis\n"
+				+ "que sea un gran reto para vosotros que tenéis siglos de experiencia enfrentadoos a \n"
+				+ "todo tipo de criaturas, y esta vez simplemente son unos aldeanos pidiendo ayuda. \n"
+				+ "O tal vez no...\n\n"
+				+ ""
+				+ "Crea un equipo de dos personajes para intentar enfrentarte a los Clucks y salbar a los\n"
+				+ "habitantes de Ulkar, o intentarlo.\n"
+				+ "-Para seleccionar una de las opciónes disponibles escribe tal cual la opción deseada y\n"
+				+ "pulsa enter."
+				+ "-A la hora de crear un personaje deberas introducir los datos pedidos y elegir un\n"
+				+ "hechizo entre los siguientes:\n"
+				+ "	+Llama del dragón: quema al enemigo seleccionado durante las próximas 3 róndas.\n"
+				+ "	 Un enemigo que se etá quemando sufre un daño igual al 10% de su vida máxima.\n"
+				+ "	+Sanación: cura al alado seleccionado un 25% de su vida máxima.\n"
+				+ "	+Beso de la muerte: enamora a un enemigo, lo cual le impedira atacar, el \n"
+				+ "	 enamoramiento dura una ronda.\n"
+				+ "	+Furia vikinga: aumenta en un 50% el daño que realizas en tus próximos 3 ataques\n"
+				+ "	+Caelestis protector: pone un escudo a un aliado que bloquea los próximos\n"
+				+ "	 2 ataques que reciba.\n"
+				+ "-Durante el combate tendrás que selecciónar la opción deseada mediante 1 o 2 al igual\n"
+				+ "el objetivo a quien va dirigira."
+				+ "-Tras cada nivel los personajes se tomarán un descanso en el que se curaran toda la\n"
+				+ "vida y si uno de ellos ha muerto revivirá con el máximo de vida. Para finalizar este\n"
+				+ "descnaso simplemente debrás pulsar enter.");
 		System.out.println(opciónesIniciales);
 		String operación=s.nextLine();
 		boolean inicio=false;
@@ -21,7 +52,7 @@ public class Juego {
 			switch (operación) {		
 			//Añadir un nuevo personaje al equipo
 			case "Nuevo personaje":
-				if (personajes<=2) {
+				if (personajes<2) {
 				
 					
 				//pido todos los datos del nuevo personaje
@@ -71,6 +102,11 @@ public class Juego {
 				e2.añadirMiembro(new Personaje(vida,nombre,daño,hechizo,Personaje.selecAspecto(aspecto)), personajes);
 				System.out.println("¡"+nombre+" se ha unido al equipo!");
 				personajes++;
+				}else {
+					System.out.println("Equipo comleto");
+					System.out.println(opciónesIniciales);
+					operación=s.nextLine();
+					break;
 				}
 				
 				
@@ -210,6 +246,10 @@ public class Juego {
 				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n                                 ¡Victória!\n\n\n\n\n\n\n");
 				finJuego=true;
 			};
+			if(e3.getEquipoPos(0).isVivo()==false&e3.getEquipoPos(1).isVivo()==false) {
+				System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n                                 ¡Fin del juego!\n\n\n\n\n\n\n");
+				finJuego=true;
+			}
 		}//finJuego
 	
 		

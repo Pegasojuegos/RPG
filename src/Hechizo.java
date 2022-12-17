@@ -31,9 +31,11 @@ public class Hechizo {
 			aliado.setVidaActual(aliado.getVidaActual()+((int)(aliado.getVida()*0.25)));
 			break;
 		case 3://Furia vikinga
+			aliado.setContEstado(0);
 			aliado.setEstadoNum(2);
 			break;
 		case 4://Caelestis protector
+			aliado.setContEstado(0);
 			aliado.setEstadoNum(1);
 			break;
 		}

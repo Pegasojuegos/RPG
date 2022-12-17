@@ -9,6 +9,7 @@ public class Personaje {
 	private boolean vivo;
 	private final String estados[]= {"","○","奭"};
 	private int estadoNum;
+	private int contEstado=0;
 	
 	private static final String aspectos[]={
 		    "\n       √°}\r\n"
@@ -127,11 +128,21 @@ public class Personaje {
 		int atq=ataque;
 		if(estadoNum==2) {
 			atq=(int) (atq+atq*0.5);
-			estadoNum=0;
+			contEstado++;
+			if(contEstado==3) {
+				estadoNum=0;
+				contEstado=0;
+			}
 		}
 		return atq;
 	}
 
+	public int getContEstado() {
+		return contEstado;
+	}
+	public void setContEstado(int contEstado) {
+		this.contEstado = contEstado;
+	}
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
 	}

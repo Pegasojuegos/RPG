@@ -37,27 +37,37 @@ public class Nivel {
 			if(enemigos[i].getEstadoNum()!=2) {
 				int objetivo=(int) (Math.random()*10)+1;
 				if(objetivo<5) {
-					//Compreuba que no tiene un escudo y si lo teine no ataca pero se lo quita
+					//Compreuba que no tiene un escudo 
 					if(e1.getEquipoPos(0).getEstadoNum()!=1) {
 						//Comprueba que esta vivo y sino ataca al otro
 						if(e1.getEquipoPos(0).isVivo()) {
 							daño(e1.getEquipoPos(0),i);
 						}else daño(e1.getEquipoPos(1),i);
-					}else e1.getEquipoPos(0).setEstadoNum(0);
+					}else {
+						e1.getEquipoPos(0).setContEstado(e1.getEquipoPos(0).getContEstado()+1);
+						if(e1.getEquipoPos(0).getContEstado()==2) {
+							e1.getEquipoPos(0).setEstadoNum(0);
+						}//if
+					}//else
 				}//atq a p1
 				else {
 					if(e1.getEquipoPos(1).getEstadoNum()!=1) {
 						if(e1.getEquipoPos(1).isVivo()) {
 							daño(e1.getEquipoPos(1),i);
 						}else daño(e1.getEquipoPos(0),i);
-					}else e1.getEquipoPos(1).setEstadoNum(0);
+					}else {
+						e1.getEquipoPos(1).setContEstado(e1.getEquipoPos(1).getContEstado()+1);
+						if(e1.getEquipoPos(1).getContEstado()==2) {
+							e1.getEquipoPos(1).setEstadoNum(1);
+						}//if
+					}//else
 				}//atq a p
 			}//ifNoEnamorado
 			//si lo está no atacará y dejará de estarlo
 			else enemigos[i].setEstadoNum(0);
 			if(enemigos[i].getEstadoNum()==1) {
 				if(enemigos[i].getContEstado()>0) {
-					enemigos[i].setVidaActual((int) (enemigos[i].getVidaActual()-(enemigos[i].getVida()*0.05)));
+					enemigos[i].setVidaActual((int) (enemigos[i].getVidaActual()-(enemigos[i].getVida()*0.1)));
 					enemigos[i].setContEstado(enemigos[i].getContEstado()-1);
 				}
 				else enemigos[i].setEstadoNum(0);

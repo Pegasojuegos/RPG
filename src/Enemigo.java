@@ -12,7 +12,7 @@ public class Enemigo {
 			+ "                                   \033[36mΞ\033[35m  Δ   Δ\u001B[0m"};
 	private boolean vivo;
 
-	private final String estados[]= {" ","\033[31m╨\u001B[0m","❦\u001B[0m"};
+	private final String estados[]= {" ","\033[31m╨\u001B[0m","\033[34m❦\u001B[0m"};
 	private int estadoNum;
 	public int getEstadoNum() {
 		return estadoNum;
