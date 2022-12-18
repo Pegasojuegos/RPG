@@ -1,5 +1,9 @@
 
 public class Personaje {
+	
+	//┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	
+	//Datos que guardará un Personaje
 	private int vidaActual;
 	private int vida;
 	private String nombre;
@@ -7,10 +11,10 @@ public class Personaje {
 	private Hechizo hechizoAprendido;
 	private String aspecto;
 	private boolean vivo;
-	private final String estados[]= {"","○","奭"};
+	private final String estados[]= {"","\033[36m○\u001B[0m","\033[35m奭\u001B[0m"};//Estados disponibles:Sin estado, escudo, furia
 	private int estadoNum;
 	private int contEstado=0;
-	
+	//Lista con todos los aspectos disponibles (tienen colores de ahí esos códigos)
 	private static final String aspectos[]={
 		    "\n       √°}\r\n"
 			+ "       \033[35m[\u001B[0m|\033[35m]\u001B[0m\\\033[32m•\u001B[0m\r\n"
@@ -24,14 +28,11 @@ public class Personaje {
 			+ "       \033[35m/\u001B[0m\033[31m[\u001B[0m|\033[31m]\u001B[0m\\\033[32m|\u001B[0m\r\n"
 			+ "      \033[35m/\u001B[0m  |. \033[32m|\u001B[0m\n",
 	};
+		
+	//┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	
-	public static String selecAspecto(int n) {
-		return aspectos[n];
-	}
-	public static String[] getListaAspectos() {
-		return aspectos;
-	}
-
+	//Metodos de la clase
+	
 	//Nuevo personaje con datos dados
 	public Personaje(int vida,String nombre,int ataque,String hechizo,String aspecto) {
 		this.estadoNum=0;
@@ -42,12 +43,9 @@ public class Personaje {
 		this.aspecto=aspecto;
 		this.vidaActual=vida;
 		vivo=true;
-	}
+	}//Crear personaje
 	
-	
-	
-
-
+	//Metodo para pasar el personaje a String, usado para ver cada miembro del equipo con sus datos
 	public String toString() {
 		return ""
 				+ "╭═════════ .✧"+nombre+"✧. ═════════╮\n"
@@ -55,75 +53,31 @@ public class Personaje {
 				+ "    "+aspecto;
 	}
 	
+	//Metrodo para pasase el personaje a String durante el nivel, solo devuelve la vida y su aspecto
 	public String ronda() {
 		return vidaActual+"        ♥\n\n"+aspecto;
 	}
 	
-	public Hechizo getHechizoAprendido() {
-		return hechizoAprendido;
-	}
-	//Curar o hacer daño
-	public void variarVida(int cantidad) {
-		vidaActual=vidaActual+cantidad;
+	//Curar o hacer daño variando su vida actual
+	public void setVidaActual(int vidaActual) {
+		this.vidaActual = vidaActual;
+		//Si sobre pasa su vida máxima vuelve a tener la vida máxima
 		if(vidaActual>vida) {
 			vidaActual=vida;
 		}
-		if(vidaActual<=0) {
-			morir();
-		}
-	}
-	
-	public int getVidaActual() {
-		return vidaActual;
-	}
-
-	public void setVidaActual(int vidaActual) {
-		this.vidaActual = vidaActual;
+		//Si tienes 0 de vida o menos llama a morir
 		if(this.vidaActual<=0) {
 			morir();
 		}
 	}
-
-	public String getAspecto() {
-		return aspecto;
-	}
-
-	public void setAspecto(String aspecto) {
-		this.aspecto = aspecto;
-	}
-
+		
 	//Muere el personaje
 	private void morir() {
 		vivo=false;
 	}
 	
-	
-
-	public boolean isVivo() {
-		return vivo;
-	}
-	public void setVivo(boolean vivo) {
-		this.vivo = vivo;
-	}
-	public int getVida() {
-		return vida;
-	}
-
-	public void setVida(int vida) {
-		this.vida = vida;
-		if(this.vida<1) {
-			morir();
-		}
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
+	//Devuelve el daño que hace y si tiene furia lo tiene en cuenta aumentando este daño que manda 
+	//y aumenta un contador para al tercer ataque quitar el estado de furia
 	public int getAtaque() {
 		int atq=ataque;
 		if(estadoNum==2) {
@@ -136,7 +90,46 @@ public class Personaje {
 		}
 		return atq;
 	}
-
+	
+	//┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓	
+	
+	//Resto de de getters y setters
+	public static String selecAspecto(int n) {
+		return aspectos[n];
+	}
+	public static String[] getListaAspectos() {
+		return aspectos;
+	}
+	public Hechizo getHechizoAprendido() {
+		return hechizoAprendido;
+	}
+	public int getVidaActual() {
+		return vidaActual;
+	}
+	public String getAspecto() {
+		return aspecto;
+	}
+	public void setAspecto(String aspecto) {
+		this.aspecto = aspecto;
+	}
+	public boolean isVivo() {
+		return vivo;
+	}
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
+	public int getVida() {
+		return vida;
+	}
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public int getContEstado() {
 		return contEstado;
 	}
@@ -146,7 +139,6 @@ public class Personaje {
 	public void setAtaque(int ataque) {
 		this.ataque = ataque;
 	}
-
 	public String[] getHechizo() {
 		return hechizoAprendido.getLista();
 	}
@@ -158,8 +150,7 @@ public class Personaje {
 	}
 	public String getEstado() {
 		return estados[estadoNum];
-	}
-
+	}	
 	
-	
+	//┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━•(=^●ω●^=)•━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 }
