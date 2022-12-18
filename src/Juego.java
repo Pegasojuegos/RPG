@@ -37,7 +37,7 @@ public class Juego {
 				+ "todo tipo de criaturas, y esta vez simplemente son unos aldeanos pidiendo ayuda. \n"
 				+ "O tal vez no...\n\n"
 				+ ""
-				+ "Crea un equipo de dos personajes para intentar enfrentarte a los Clucks y salbar a los\n"
+				+ "Crea un equipo de dos personajes para intentar enfrentarte a los Clucks y salvar a los\n"
 				+ "habitantes de Ulkar, o intentarlo.\n"
 				+ "-Para seleccionar una de las opciónes disponibles escribe tal cual la opción deseada y\n"
 				+ "pulsa enter."
@@ -52,10 +52,10 @@ public class Juego {
 				+ "	+Caelestis protector: pone un escudo a un aliado que bloquea los próximos\n"
 				+ "	 2 ataques que reciba.\n"
 				+ "-Durante el combate tendrás que selecciónar la opción deseada mediante 1 o 2 al igual\n"
-				+ "el objetivo a quien va dirigira."
+				+ "el objetivo a quien va dirigira.\n"
 				+ "-Tras cada nivel los personajes se tomarán un descanso en el que se curaran toda la\n"
 				+ "vida y si uno de ellos ha muerto revivirá con el máximo de vida. Para finalizar este\n"
-				+ "descnaso simplemente debrás pulsar enter.");
+				+ "descanso simplemente deberás pulsar enter.");
 		System.out.println(opciónesIniciales);//Muestra las opciones
 		String operación=s.nextLine();//Pide una primera operación
 		boolean inicio=false;
