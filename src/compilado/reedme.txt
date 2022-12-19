@@ -1,2 +1,0 @@
-Para ejecutar el juego abre la carpeta compilado con el terminal y desde ahí esctibe:
-java Juego
